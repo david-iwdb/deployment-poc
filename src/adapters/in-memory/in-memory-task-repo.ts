@@ -8,6 +8,11 @@ import type {
 import { ForeignKeyViolationError, NotFoundError } from '../../domain/errors';
 import type { InMemoryStore } from './store';
 
+/**
+ * In-memory (map-backed) implementation of {@link TaskRepository}, used in the
+ * development environment. It rejects tasks that reference a non-existent
+ * project, mirroring the real database's foreign-key constraint.
+ */
 export class InMemoryTaskRepository implements TaskRepository {
   constructor(private readonly store: InMemoryStore) {}
 

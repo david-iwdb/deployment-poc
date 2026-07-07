@@ -4,6 +4,12 @@ import type { CreateProjectInput, ProjectRepository } from '../../domain/ports/p
 import { ForeignKeyViolationError, NotFoundError } from '../../domain/errors';
 import type { InMemoryStore } from './store';
 
+/**
+ * In-memory (map-backed) implementation of {@link ProjectRepository}, used in
+ * the development environment. It deliberately enforces the same referential
+ * integrity the real database will, by refusing to delete a project that still
+ * has tasks.
+ */
 export class InMemoryProjectRepository implements ProjectRepository {
   constructor(private readonly store: InMemoryStore) {}
 
