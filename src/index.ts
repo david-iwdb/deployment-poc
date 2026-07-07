@@ -1,6 +1,6 @@
-import { createApp } from './api/server';
+import { composeApp } from './compose';
 
-const app = createApp();
+const app = composeApp();
 const port = Number(process.env.PORT ?? 3000);
 
 const address = await app.listen({ port, host: '0.0.0.0' });
