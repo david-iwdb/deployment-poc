@@ -1,17 +1,17 @@
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import request from 'supertest';
 import type { FastifyInstance } from 'fastify';
-import { createApp } from '../../src/api/server';
+import { composeApp } from '../../src/compose';
 
 describe('GET /health', () => {
   let app: FastifyInstance;
 
-  beforeAll(async () => {
-    app = createApp();
+  beforeEach(async () => {
+    app = composeApp('development');
     await app.ready();
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await app.close();
   });
 
